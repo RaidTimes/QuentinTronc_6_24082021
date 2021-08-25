@@ -1,7 +1,17 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
+
+const saucesRoutes = require('./routes/sauces');
+const userRoutes = require('./routes/user');
 
 const app = express();
+
+mongoose.connect('mongodb+srv://RaidTimes:BdMBlvWUBDwuvX8u@piiquante.asil0.mongodb.net/piiquante?retryWrites=true&w=majority',
+  { useNewUrlParser: true,
+    useUnifiedTopology: true })
+  .then(() => console.log('Connexion à MongoDB réussie !'))
+  .catch(() => console.log('Connexion à MongoDB échouée !'));
 
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
@@ -10,25 +20,9 @@ app.use((req, res, next) => {
     next();
   });
 
-  app.use(bodyParser.json());
+app.use(bodyParser.json());
 
-app.post('/api/sauces', (req, res, next) => {
-    console.log(req.body);
-});
-
-app.use('/api/sauces', (req, res, next) => {
-    const sauces = [
-        {
-            _id: 'sauce1',
-            sauce: 'Mayonnaise',
-            like: '0',
-        },
-        {
-            _id: 'sauce1',
-            sauce: 'Tartare',
-            like: '0',
-        },
-    ];
-});
+app.use('/api/sauces', saucesRoutes);
+app.use('/api/auth', userRoutes);
 
 module.exports = app;
