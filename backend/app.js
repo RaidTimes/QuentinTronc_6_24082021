@@ -27,7 +27,7 @@ app.use(helmet());
  // .then(() => console.log('Connexion à MongoDB réussie !'))
  // .catch(() => console.log('Connexion à MongoDB échouée !'));
 
-//mongoose.connect('mongodb+srv://RaidTimes:BdMBlvWUBDwuvX8u@piiquante.asil0.mongodb.net/piiquante?retryWrites=true&w=majority',
+//mongoose.connect('mongodb+srv://RaidTimes:@piiquante.asil0.mongodb.net/piiquante?retryWrites=true&w=majority',
  // { useNewUrlParser: true,
  //   useUnifiedTopology: true })
   //.then(() => console.log('Connexion à MongoDB réussie !'))
