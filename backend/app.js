@@ -3,8 +3,9 @@ const helmet = require('helmet');
 const rateLimit = require("express-rate-limit");
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+require('dotenv').config();
+
 const path = require('path');
-require('dotenv').config()
 
 const saucesRoutes = require('./routes/sauces');
 const userRoutes = require('./routes/user');
@@ -18,20 +19,12 @@ app.use("/api/", apiLimiter)
 
 app.use(helmet());
 
-//const db = require('db')
-//mongoose.connect({
-  //host: process.env.DB_HOST,
- // username: process.env.DB_USER,
- // password: process.env.DB_PASS
-//})
- // .then(() => console.log('Connexion à MongoDB réussie !'))
- // .catch(() => console.log('Connexion à MongoDB échouée !'));
-
-//mongoose.connect('mongodb+srv://RaidTimes:@piiquante.asil0.mongodb.net/piiquante?retryWrites=true&w=majority',
- // { useNewUrlParser: true,
- //   useUnifiedTopology: true })
-  //.then(() => console.log('Connexion à MongoDB réussie !'))
- // .catch(() => console.log('Connexion à MongoDB échouée !'));
+mongoose.connect(process.env.DATABASE_URL, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+})
+  .then(() => console.log('Connexion à MongoDB réussie !'))
+  .catch(error => console.error(error.message));
 
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');

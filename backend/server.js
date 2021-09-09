@@ -1,6 +1,6 @@
 const http = require('http');
 const app = require('./app');
-require('./initDB')();
+//require('./initDB')();
 
 const normalizePort = val => {
   const port = parseInt(val, 10);
